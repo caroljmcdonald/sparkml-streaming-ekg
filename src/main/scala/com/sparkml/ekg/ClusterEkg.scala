@@ -18,10 +18,6 @@ object ClusterEkg {
 
   def main(args: Array[String]) {
 
-    //  val spark = SparkSession.builder().appName("Clusterekg").getOrCreate()
-
-    //  import spark.implicits._
-
     val conf = new SparkConf().setAppName("SparkDFebay")
     val sc = new SparkContext(conf)
 
@@ -48,7 +44,7 @@ object ClusterEkg {
     }
     processed.cache
     /// 3. create the clusters...
-    val model = KMeans.train(processed, 100, 3)
+    val model = KMeans.train(processed, 300, 20)
     model.clusterCenters.foreach(println)
     model.save(sc, "/user/user01/data/anomaly-detection-master")
 
